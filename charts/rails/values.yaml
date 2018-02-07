@@ -1,0 +1,18 @@
+replicaCount: 2
+image:
+  pullPolicy: IfNotPresent
+service:
+  name: ruby
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 3000
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+ingress:
+  enabled: true
+basedomain: localhost
