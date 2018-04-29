@@ -30,9 +30,6 @@ spec:
         - name: data
           mountPath: /app/node_modules
           subPath: node-modules
-        - name: data
-          mountPath: /app/vendor
-          subPath: vendor
       - <<: *main
         name: {{ .Chart.Name }}-console
         command: ['sh', '-c', 'while true; do sleep 60; done']
