@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 1
 image:
   pullPolicy: IfNotPresent
 service:
@@ -8,11 +8,11 @@ service:
   internalPort: 3000
 resources:
   limits:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 1
+    memory: 4Gi
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 1
+    memory: 4Gi
 ingress:
   enabled: true
 basedomain: localhost
