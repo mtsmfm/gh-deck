@@ -16,10 +16,31 @@ spec:
         app: {{ template "fullname" . }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}
+      - &main
+        name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
+        volumeMounts:
+        - name: approot
+          mountPath: /app
+        - name: data
+          mountPath: /app/node_modules
+          subPath: node-modules
+        - name: data
+          mountPath: /app/vendor
+          subPath: vendor
+      - <<: *main
+        name: {{ .Chart.Name }}-console
+        command: ['sh', '-c', 'while true; do sleep 60; done']
+        ports: []
+      volumes:
+      - name: approot
+        hostPath:
+          path: {{ .Values.currentDir }}
+      - name: data
+        persistentVolumeClaim:
+          claimName: pv0001
