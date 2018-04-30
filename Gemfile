@@ -7,6 +7,8 @@ gem 'rails', '~> 5.2.0'
 gem 'sqlite3'
 gem 'puma'
 gem 'bootsnap', require: false
+gem 'omniauth'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'pry-byebug'
