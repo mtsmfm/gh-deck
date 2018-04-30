@@ -32,7 +32,7 @@ spec:
           subPath: node-modules
       - <<: *main
         name: {{ .Chart.Name }}-console
-        command: ['sh', '-c', 'while true; do sleep 60; done']
+        command: ['sh', '-c', 'while true; do sleep 1; done']
         ports: []
       volumes:
       - name: approot
