@@ -6,3 +6,6 @@
     watch = false
     watch-delay = 2
     auto-connect = false
+    set=[
+      "currentDir=/path/to/gh-deck"
+    ]
