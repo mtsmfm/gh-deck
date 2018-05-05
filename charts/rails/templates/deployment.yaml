@@ -20,6 +20,8 @@ spec:
         name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        stdin: true
+        tty: true
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         resources:
