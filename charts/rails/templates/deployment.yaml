@@ -32,6 +32,11 @@ spec:
         - name: data
           mountPath: /app/node_modules
           subPath: node-modules
+        env:
+        - name: GITHUB_CLIENT_ID
+          value: {{ .Values.githubClientId }}
+        - name: GITHUB_CLIENT_SECRET
+          value: {{ .Values.githubClientSecret }}
       - <<: *main
         name: {{ .Chart.Name }}-console
         command: ['sh', '-c', 'while true; do sleep 1; done']
