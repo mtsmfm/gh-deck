@@ -9,6 +9,7 @@ gem 'puma'
 gem 'bootsnap', require: false
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'webpacker'
 
 group :development, :test do
   gem 'pry-byebug'
