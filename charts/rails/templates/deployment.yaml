@@ -29,9 +29,6 @@ spec:
         volumeMounts:
         - name: approot
           mountPath: /app
-        - name: data
-          mountPath: /app/node_modules
-          subPath: node-modules
         env:
         - name: GITHUB_CLIENT_ID
           value: {{ .Values.githubClientId }}
@@ -45,6 +42,3 @@ spec:
       - name: approot
         hostPath:
           path: {{ .Values.currentDir }}
-      - name: data
-        persistentVolumeClaim:
-          claimName: pv0001
