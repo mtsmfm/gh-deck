@@ -38,6 +38,11 @@ spec:
         name: {{ .Chart.Name }}-console
         command: ['sh', '-c', 'while true; do sleep 1; done']
         ports: []
+      - <<: *main
+        name: {{ .Chart.Name }}-webpack-dev-server
+        command: ['bin/webpack-dev-server']
+        ports:
+        - containerPort: {{ .Values.webpackDevServer.internalPort }}
       volumes:
       - name: approot
         hostPath:

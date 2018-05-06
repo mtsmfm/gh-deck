@@ -6,6 +6,9 @@ service:
   type: ClusterIP
   externalPort: 80
   internalPort: 3000
+webpackDevServer:
+  externalPort: 81
+  internalPort: 3001
 ingress:
   enabled: true
 basedomain: localhost

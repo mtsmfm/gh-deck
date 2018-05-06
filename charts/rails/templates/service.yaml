@@ -11,5 +11,9 @@ spec:
     targetPort: {{ .Values.service.internalPort }}
     protocol: TCP
     name: {{ .Values.service.name }}
+  - port: {{ .Values.webpackDevServer.externalPort }}
+    targetPort: {{ .Values.webpackDevServer.internalPort }}
+    protocol: TCP
+    name: webpack-dev-server
   selector:
     app: {{ template "fullname" . }}
