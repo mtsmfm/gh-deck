@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'webpacker'
 gem 'graphql'
+gem 'graphql-batch'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -20,5 +21,3 @@ end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
-
-gem 'graphql-batch'
