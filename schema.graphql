@@ -1,0 +1,21 @@
+type Mutation {
+  # An example field added by the generator
+  testField: String
+}
+
+# An object with an ID.
+interface Node {
+  # ID of the object.
+  id: ID!
+}
+
+type Query {
+  # Fetches an object given its ID.
+  node(
+    # ID of the object.
+    id: ID!
+  ): Node
+
+  # An example field added by the generator
+  testField: String
+}
