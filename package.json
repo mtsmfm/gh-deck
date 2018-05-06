@@ -9,6 +9,8 @@
     "react-relay": "^1.6.0"
   },
   "devDependencies": {
+    "babel-plugin-relay": "^1.6.0",
+    "graphql": "^0.13.2",
     "webpack-dev-server": "2.11.2"
   }
 }
