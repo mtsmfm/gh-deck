@@ -10,6 +10,7 @@ gem 'bootsnap', require: false
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'webpacker'
+gem 'graphql'
 
 group :development, :test do
   gem 'pry-byebug'
