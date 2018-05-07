@@ -13,5 +13,8 @@
     "graphql": "^0.13.2",
     "relay-compiler": "^1.6.0",
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "relay": "relay-compiler --src ./app/javascript --schema ./schema.graphql --extensions js jsx"
   }
 }

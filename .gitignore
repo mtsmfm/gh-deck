@@ -31,3 +31,5 @@ draft.toml
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+
+__generated__

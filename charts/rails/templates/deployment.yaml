@@ -43,6 +43,10 @@ spec:
         command: ['bin/webpack-dev-server']
         ports:
         - containerPort: {{ .Values.webpackDevServer.internalPort }}
+      - <<: *main
+        name: {{ .Chart.Name }}-relay-compiler
+        command: ['yarn', 'run', 'relay', '--', '--watch']
+        ports: []
       volumes:
       - name: approot
         hostPath:
