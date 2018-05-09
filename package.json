@@ -3,6 +3,7 @@
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
     "graphiql": "^0.11.11",
+    "material-ui": "^1.0.0-beta.47",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
