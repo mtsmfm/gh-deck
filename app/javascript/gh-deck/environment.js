@@ -18,6 +18,7 @@ function fetchQuery(
       query: operation.text,
       variables,
     }),
+    credentials: 'same-origin'
   }).then(response => {
     return response.json();
   });

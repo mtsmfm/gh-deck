@@ -16,6 +16,12 @@ type Query {
     id: ID!
   ): Node
 
-  # An example field added by the generator
-  testField: String
+  # User
+  viewer: User
+}
+
+type User {
+  id: ID!
+  image: String!
+  name: String!
 }

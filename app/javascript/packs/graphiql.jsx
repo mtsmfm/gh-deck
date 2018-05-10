@@ -9,6 +9,7 @@ function graphQLFetcher(graphQLParams) {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(graphQLParams),
+    credentials: 'same-origin'
   }).then(response => response.json());
 }
 

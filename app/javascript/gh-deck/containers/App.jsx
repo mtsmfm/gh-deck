@@ -1,6 +1,7 @@
 import React from 'react';
 import {graphql, QueryRenderer} from 'react-relay';
 import environment from '../environment';
+import {Button, Avatar} from 'material-ui';
 
 export default class App extends React.Component {
   render() {
@@ -9,7 +10,9 @@ export default class App extends React.Component {
         environment={environment}
         query={graphql`
           query AppQuery {
-            testField
+            viewer {
+              id, image
+            }
           }
         `}
         variables={{}}
@@ -20,7 +23,14 @@ export default class App extends React.Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-          return <div>{props.testField}</div>;
+          return <div>
+            {
+              props.viewer ?
+                <Avatar src={props.viewer.image} />
+              :
+                <Button href="/auth/github">Login via GitHub</Button>
+            }
+          </div>;
         }}
       />
     );

@@ -4,10 +4,10 @@ Types::QueryType = GraphQL::ObjectType.define do
   # They will be entry points for queries on your schema.
 
   # TODO: remove me
-  field :testField, types.String do
-    description "An example field added by the generator"
+  field :viewer, Types::UserType do
+    description "User"
     resolve ->(obj, args, ctx) {
-      "Hello World!"
+      ctx[:current_user]
     }
   end
 
