@@ -2,8 +2,9 @@ import React from 'react';
 import {graphql, QueryRenderer} from 'react-relay';
 import environment from '../environment';
 import {Button, Avatar} from 'material-ui';
+import {hot} from 'react-hot-loader'
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <QueryRenderer
@@ -36,3 +37,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default hot(module)(App);

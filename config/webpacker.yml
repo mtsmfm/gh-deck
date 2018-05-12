@@ -38,7 +38,7 @@ development:
     host: 0.0.0.0
     port: 3001
     public: gh-deck-webpack-dev-server.localhost
-    hmr: false
+    hmr: true
     # Inline should be set to true if using HMR
     inline: true
     overlay: true
