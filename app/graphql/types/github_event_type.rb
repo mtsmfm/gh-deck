@@ -24,7 +24,7 @@ Types::GithubEventType = GraphQL::ObjectType.define do
   end
   field :createdAt, !types.String do
     resolve -> (obj, args, ctx) {
-      obj.github_created_at
+      obj.github_created_at.iso8601
     }
   end
 end

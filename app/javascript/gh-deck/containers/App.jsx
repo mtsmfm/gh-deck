@@ -3,6 +3,7 @@ import {graphql, QueryRenderer} from 'react-relay';
 import environment from '../environment';
 import {Button, Avatar, Grid, Typography, ListItemText, List, ListItem, Divider} from 'material-ui';
 import {hot} from 'react-hot-loader'
+import moment from 'moment'
 
 class App extends React.Component {
   render() {
@@ -47,11 +48,17 @@ class App extends React.Component {
                                 <ListItemText>
                                   <Grid container>
                                     <Grid item xs={12}>
-                                      <Typography variant='caption'>{e.githubUser.login}</Typography>
+                                      <Grid container>
+                                        <Grid item xs={6}>
+                                          <Typography variant='caption'>{e.githubUser.login}</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                          <Typography variant='caption' style={{textAlign: 'right'}}>{moment(e.createdAt).fromNow()}</Typography>
+                                        </Grid>
+                                      </Grid>
                                       <Typography variant='caption'>{e.type}</Typography>
                                       <Typography>{e.body}</Typography>
                                       <Typography variant='caption' component='a' href={e.htmlUrl} target="_blank" rel="noreferrer noopener">{e.htmlUrl}</Typography>
-                                      <Typography variant='caption'>{e.createdAt}</Typography>
                                     </Grid>
                                   </Grid>
                                 </ListItemText>
