@@ -8,4 +8,6 @@
     auto-connect = false
     set=[
       "currentDir=/path/to/gh-deck"
+      "githubClientId=xxxxxxxx",
+      "githubClientSecret=xxxxxxxxxxxxxxx"
     ]
