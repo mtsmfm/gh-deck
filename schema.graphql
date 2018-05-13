@@ -1,3 +1,18 @@
+type GithubEvent {
+  body: String
+  createdAt: String!
+  githubUser: GithubUser!
+  htmlUrl: String
+  id: ID!
+  type: String!
+}
+
+type GithubUser {
+  avatarUrl: String!
+  id: ID!
+  login: String!
+}
+
 type Mutation {
   # An example field added by the generator
   testField: String
@@ -21,6 +36,7 @@ type Query {
 }
 
 type User {
+  githubEvents: [GithubEvent]!
   id: ID!
   image: String!
   name: String!

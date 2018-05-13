@@ -12,6 +12,7 @@ gem 'omniauth-github'
 gem 'webpacker'
 gem 'graphql'
 gem 'graphql-batch'
+gem 'octokit'
 
 group :development, :test do
   gem 'pry-byebug'
