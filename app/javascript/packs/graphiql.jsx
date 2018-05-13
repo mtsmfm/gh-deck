@@ -13,7 +13,7 @@ function graphQLFetcher(graphQLParams) {
   }).then(response => response.json());
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   ReactDOM.render(
     <div style={{height: '100vh'}}>
       <GraphiQL fetcher={graphQLFetcher} />
