@@ -1,6 +1,8 @@
 class Init < ActiveRecord::Migration[5.2]
   def change
-    create_table :users do |t|
+    enable_extension 'pgcrypto'
+
+    create_table :users, id: :uuid do |t|
       t.string :uid, null: false
       t.string :provider, null: false
       t.string :name, null: false
