@@ -34,6 +34,8 @@ spec:
           value: {{ .Values.githubClientId }}
         - name: GITHUB_CLIENT_SECRET
           value: {{ .Values.githubClientSecret }}
+        - name: DATABASE_URL
+          value: postgresql://postgres:mysecretpassword@localhost
       - <<: *main
         name: {{ .Chart.Name }}-console
         command: ['sh', '-c', 'while true; do sleep 1; done']
@@ -47,7 +49,15 @@ spec:
         name: {{ .Chart.Name }}-relay-compiler
         command: ['yarn', 'run', 'relay', '--', '--watch']
         ports: []
+      - name: {{ .Chart.Name }}-postgres
+        image: postgres:10.3-alpine
+        volumeMounts:
+        - name: pg-data
+          mountPath: /var/lib/postgresql/data
       volumes:
       - name: approot
         hostPath:
           path: {{ .Values.currentDir }}
+      - name: pg-data
+        persistentVolumeClaim:
+          claimName: pv0001
