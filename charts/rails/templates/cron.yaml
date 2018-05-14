@@ -12,7 +12,7 @@ spec:
           - name: {{ .Chart.Name }}
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
-            command: ['bin/rails', 'r', '"User.find_each {|u| ImportGithubReceivedEventsJob.perform_now(u) }"']
+            command: ['bin/rails', 'r', 'User.find_each {|u| ImportGithubReceivedEventsJob.perform_now(u) }']
             volumeMounts:
             - name: approot
               mountPath: /app
