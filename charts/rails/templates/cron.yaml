@@ -18,7 +18,7 @@ spec:
               mountPath: /app
             env:
             - name: DATABASE_URL
-              value: postgresql://postgres:mysecretpassword@localhost
+              value: postgresql://postgres:mysecretpassword@{{ template "fullname" . }}-postgres
           restartPolicy: Never
           volumes:
           - name: approot
