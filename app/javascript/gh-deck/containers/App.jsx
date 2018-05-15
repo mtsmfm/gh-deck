@@ -4,6 +4,7 @@ import environment from '../environment';
 import {Button, Avatar, Grid, Typography, ListItemText, List, ListItem, Divider} from 'material-ui';
 import {hot} from 'react-hot-loader'
 import moment from 'moment'
+import ReactMarkdown from 'react-markdown'
 
 class App extends React.Component {
   render() {
@@ -57,7 +58,7 @@ class App extends React.Component {
                                         </Grid>
                                       </Grid>
                                       <Typography variant='caption'>{e.type}</Typography>
-                                      <Typography>{e.body}</Typography>
+                                      <ReactMarkdown source={e.body} renderers={{link : props => <a href={props.href} target="_blank">{props.children}</a>}}/>
                                       <Typography variant='caption' component='a' href={e.htmlUrl} target="_blank" rel="noreferrer noopener">{e.htmlUrl}</Typography>
                                     </Grid>
                                   </Grid>
