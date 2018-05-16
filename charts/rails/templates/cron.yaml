@@ -4,6 +4,8 @@ metadata:
   name: {{ template "fullname" . }}
 spec:
   schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 86400
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
