@@ -38,7 +38,7 @@ class GithubEventList extends React.Component {
   }
 }
 
-export default createFragmentContainer(debounceRender(GithubEventList, 300), {
+export default createFragmentContainer(debounceRender(GithubEventList, 1000), {
   viewer: graphql`
     fragment GithubEventList_viewer on User {
       _id: id @__clientField(handle: "now")
