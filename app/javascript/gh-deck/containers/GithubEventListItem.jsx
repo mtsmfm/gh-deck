@@ -4,7 +4,7 @@ import {createFragmentContainer, graphql} from 'react-relay';
 import moment from 'moment'
 import ReactMarkdown from 'react-markdown'
 
-const GithubEventListItem = ({githubEvent}) => (
+const GithubEventListItem = ({githubEvent, viewer}) => (
   <ListItem>
     <Avatar src={githubEvent.githubUser.avatarUrl} component='a' href={`https://github.com/${githubEvent.githubUser.login}`} target="_blank" rel="noreferrer noopener"/>
     <ListItemText>
@@ -16,7 +16,7 @@ const GithubEventListItem = ({githubEvent}) => (
             </Grid>
             <Grid item xs={6}>
               <Tooltip title={moment(githubEvent.createdAt).format()}>
-                <Typography variant='caption' style={{textAlign: 'right'}}>{moment(githubEvent.createdAt).fromNow()}</Typography>
+                <Typography variant='caption' style={{textAlign: 'right'}}>{moment(githubEvent.createdAt).from(viewer.now)}</Typography>
               </Tooltip>
             </Grid>
           </Grid>
@@ -30,6 +30,11 @@ const GithubEventListItem = ({githubEvent}) => (
 )
 
 export default createFragmentContainer(GithubEventListItem, {
+  viewer: graphql`
+    fragment GithubEventListItem_viewer on User {
+      now
+    }
+  `,
   githubEvent: graphql`
     fragment GithubEventListItem_githubEvent on GithubEvent {
       id, type, htmlUrl, createdAt, body
