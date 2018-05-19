@@ -2,6 +2,7 @@ AppSchema = GraphQL::Schema.define do
 
   mutation(Types::MutationType)
   query(Types::QueryType)
+  subscription Types::SubscriptionType
   # Relay Object Identification:
 
   # Return a string UUID for `object`
@@ -27,4 +28,5 @@ AppSchema = GraphQL::Schema.define do
 
   # GraphQL::Batch setup:
   use GraphQL::Batch
+  use GraphQL::Subscriptions::ActionCableSubscriptions
 end

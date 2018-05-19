@@ -5,7 +5,12 @@ class ImportGithubReceivedEventsJob < ApplicationJob
     Rails.logger.info("ImportGithubReceivedEventsJob #{user}")
 
     client = Octokit::Client.new(access_token: user.token)
-    events = client.received_events(client.login)
+    events =
+      if Rails.env.development?
+        client.public_events
+      else
+        client.received_events(client.login)
+      end
 
     ApplicationRecord.transaction do
       GithubApiResponse.record_last_response!(user: user, last_response: client.last_response)
@@ -24,7 +29,7 @@ class ImportGithubReceivedEventsJob < ApplicationJob
         end
 
         GithubEvent.find_or_initialize_by(github_id: event[:id], user: user).tap do |e|
-          e.update!(
+          e.assign_attributes(
             github_type: event[:type],
             github_created_at: event[:created_at],
             payload: event[:payload],
@@ -32,6 +37,13 @@ class ImportGithubReceivedEventsJob < ApplicationJob
             github_user: gh_user,
             github_repository: gh_repo
           )
+
+          if e.new_record?
+            e.save!
+            AppSchema.subscriptions.trigger 'githubEventCreated', {}, e, scope: user.id
+          else
+            e.save!
+          end
         end
       end
     end

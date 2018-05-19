@@ -1,8 +1,10 @@
 {
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "actioncable": "^5.2.0",
     "babel-preset-react": "^6.24.1",
     "graphiql": "^0.11.11",
+    "graphql-ruby-client": "^1.4.0",
     "material-ui": "^1.0.0-beta.47",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",

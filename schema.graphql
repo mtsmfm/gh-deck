@@ -35,6 +35,10 @@ type Query {
   viewer: User
 }
 
+type Subscription {
+  githubEventCreated: GithubEvent!
+}
+
 type User {
   githubEvents: [GithubEvent]!
   id: ID!

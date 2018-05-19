@@ -67,6 +67,10 @@
   version "0.11.7"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.11.7.tgz#da39a2f7c74e793e32e2bb7b3b68da1691532dd5"
 
+"@types/graphql@0.12.6":
+  version "0.12.6"
+  resolved "http://registry.npmjs.org/@types/graphql/-/graphql-0.12.6.tgz#3d619198585fcabe5f4e1adfb5cf5f3388c66c13"
+
 "@types/jss@^9.3.0":
   version "9.5.2"
   resolved "https://registry.yarnpkg.com/@types/jss/-/jss-9.5.2.tgz#85076b2c16606a6f996aa7e20c1ec7ed6a08075f"
@@ -114,6 +118,10 @@ acorn@^4.0.3:
 acorn@^5.0.0:
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.5.3.tgz#f473dd47e0277a08e28e9bec5aeeb04751f0b8c9"
+
+actioncable@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.0.tgz#97a4e06681c749a8af86e1ead8487bf5e87b59e4"
 
 ajv-keywords@^3.1.0:
   version "3.2.0"
@@ -181,6 +189,18 @@ anymatch@^2.0.0:
   dependencies:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
+
+apollo-link@^1.0.3:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.2.tgz#54c84199b18ac1af8d63553a68ca389c05217a03"
+  dependencies:
+    "@types/graphql" "0.12.6"
+    apollo-utilities "^1.0.0"
+    zen-observable-ts "^0.8.9"
+
+apollo-utilities@^1.0.0:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.12.tgz#9e2b2a34cf89f3bf0d73a664effd8c1bb5d1b7f7"
 
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
@@ -2839,6 +2859,21 @@ graphql-request@^1.4.0:
   dependencies:
     cross-fetch "2.0.0"
 
+graphql-ruby-client@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/graphql-ruby-client/-/graphql-ruby-client-1.4.0.tgz#7a8ba7dbb9769164bffb254abafa89823416e62d"
+  dependencies:
+    apollo-link "^1.0.3"
+    glob "^7.1.2"
+    graphql "^0.10.5"
+    minimist "^1.2.0"
+
+graphql@^0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.5.tgz#c9be17ca2bdfdbd134077ffd9bbaa48b8becd298"
+  dependencies:
+    iterall "^1.1.0"
+
 graphql@^0.12.3:
   version "0.12.3"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.12.3.tgz#11668458bbe28261c0dcb6e265f515ba79f6ce07"
@@ -3521,7 +3556,7 @@ iterall@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
 
-iterall@^1.2.1:
+iterall@^1.1.0, iterall@^1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.2.tgz#92d70deb8028e0c39ff3164fdbf4d8b088130cd7"
 
@@ -7078,3 +7113,13 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+zen-observable-ts@^0.8.9:
+  version "0.8.9"
+  resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.9.tgz#d3c97af08c0afdca37ebcadf7cc3ee96bda9bab1"
+  dependencies:
+    zen-observable "^0.8.0"
+
+zen-observable@^0.8.0:
+  version "0.8.8"
+  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.8.tgz#1ea93995bf098754a58215a1e0a7309e5749ec42"

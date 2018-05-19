@@ -4,6 +4,12 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
+import ActionCable from 'actioncable';
+import createHandler from 'graphql-ruby-client/subscriptions/createHandler';
+
+const subscriptionHandler = createHandler({
+  cable: ActionCable.createConsumer(),
+});
 
 function fetchQuery(
   operation,
@@ -25,7 +31,7 @@ function fetchQuery(
 }
 
 const environment = new Environment({
-  network: Network.create(fetchQuery),
+  network: Network.create(fetchQuery, subscriptionHandler),
   store: new Store(new RecordSource()),
 });
 
