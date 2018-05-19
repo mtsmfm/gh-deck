@@ -4,6 +4,7 @@ import {createFragmentContainer, graphql} from 'react-relay';
 import GithubEventCreatedSubscription from '../subscriptions/GithubEventCreatedSubscription'
 import GithubEventListItem from './GithubEventListItem'
 import moment from 'moment'
+import debounceRender from 'react-debounce-render';
 
 class GithubEventList extends React.Component {
   componentDidMount() {
@@ -29,7 +30,7 @@ class GithubEventList extends React.Component {
   }
 }
 
-export default createFragmentContainer(GithubEventList, {
+export default createFragmentContainer(debounceRender(GithubEventList, 300), {
   viewer: graphql`
     fragment GithubEventList_viewer on User {
       id
