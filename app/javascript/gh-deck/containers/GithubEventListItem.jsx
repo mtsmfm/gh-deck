@@ -15,9 +15,11 @@ const GithubEventListItem = ({githubEvent, viewer}) => (
               <Typography variant='caption'>{githubEvent.githubUser.login}</Typography>
             </Grid>
             <Grid item xs={6}>
-              <Tooltip title={moment(githubEvent.createdAt).format()}>
-                <Typography variant='caption' style={{textAlign: 'right'}}>{moment(githubEvent.createdAt).from(viewer.now)}</Typography>
-              </Tooltip>
+              <div style={{textAlign: 'right'}} >
+                <Tooltip title={moment(githubEvent.createdAt).format()}>
+                  <Typography variant='caption' style={{display: 'inline'}}>{moment(githubEvent.createdAt).from(viewer.now)}</Typography>
+                </Tooltip>
+              </div>
             </Grid>
           </Grid>
           <Typography variant='caption'>{githubEvent.type}</Typography>
