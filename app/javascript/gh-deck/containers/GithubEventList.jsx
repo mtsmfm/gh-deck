@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, Divider} from 'material-ui';
+import {List, Divider, Fade} from 'material-ui';
 import {createFragmentContainer, graphql, commitLocalUpdate} from 'react-relay';
 import GithubEventCreatedSubscription from '../subscriptions/GithubEventCreatedSubscription'
 import GithubEventListItem from './GithubEventListItem'
@@ -27,10 +27,12 @@ class GithubEventList extends React.Component {
       <List>
         {
           this.props.viewer.githubEvents.slice(0, 50).map(e =>
-            <div key={e.id}>
-              <GithubEventListItem githubEvent={e} viewer={this.props.viewer} />
-              <Divider />
-            </div>
+            <Fade key={e.id} timeout={1000} in={true}>
+              <div>
+                <GithubEventListItem githubEvent={e} viewer={this.props.viewer} />
+                <Divider />
+              </div>
+            </Fade>
           )
         }
       </List>
