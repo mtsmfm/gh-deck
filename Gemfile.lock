@@ -58,7 +58,7 @@ GEM
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    graphql (1.7.14)
+    graphql (1.8.0)
     graphql-batch (0.3.9)
       graphql (>= 0.8, < 2)
       promise.rb (~> 0.7.2)
