@@ -14,8 +14,6 @@ type GithubUser {
 }
 
 type Mutation {
-  # An example field added by the generator
-  testField: String
 }
 
 # An object with an ID.
