@@ -1,29 +1,26 @@
-class Types::GithubEvent < Types::BaseObject
+module Types::GithubEvent
+  include Types::BaseInterface
 
   global_id_field :id
-  field :type, String, null: false
 
-  def type
-    object.github_type
-  end
-  field :html_url, String, null: true
-
-  def html_url
-    object.payload.dig('comment', 'html_url') || object.payload.dig('issue', 'html_url') || object.payload.dig('pull_request', 'html_url')
-  end
+  field :type, String, method: :github_type, null: false
   field :github_user, Types::GithubUser, null: false
-
-  def github_user
-    object.github_user
-  end
-  field :body, String, null: true
-
-  def body
-    object.payload.dig('comment', 'body')
-  end
   field :created_at, String, null: false
+
+  orphan_types Types::GithubEvent::PushEvent, Types::GithubEvent::UnknownEvent
 
   def created_at
     object.github_created_at.iso8601
+  end
+
+  definition_methods do
+    def resolve_type(object, context)
+      case object.github_type
+      when 'PushEvent'
+        PushEvent
+      else
+        UnknownEvent
+      end
+    end
   end
 end

@@ -1,10 +1,13 @@
-type GithubEvent {
-  body: String
+interface GithubEvent {
   createdAt: String!
   githubUser: GithubUser!
-  htmlUrl: String
   id: ID!
   type: String!
+}
+
+type GithubRepository {
+  id: ID!
+  name: String!
 }
 
 type GithubUser {
@@ -17,6 +20,14 @@ type GithubUser {
 interface Node {
   # ID of the object.
   id: ID!
+}
+
+type PushEvent implements GithubEvent {
+  createdAt: String!
+  githubRepository: GithubRepository!
+  githubUser: GithubUser!
+  id: ID!
+  type: String!
 }
 
 type Query {
@@ -32,6 +43,16 @@ type Query {
 
 type Subscription {
   githubEventCreated: GithubEvent!
+}
+
+type UnknownEvent implements GithubEvent {
+  body: String
+  createdAt: String!
+  githubRepository: GithubRepository
+  githubUser: GithubUser!
+  htmlUrl: String
+  id: ID!
+  type: String!
 }
 
 type User {
