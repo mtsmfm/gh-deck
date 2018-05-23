@@ -1,4 +1,4 @@
-class Types::GithubUserType < Types::BaseObject
+class Types::GithubUser < Types::BaseObject
 
   global_id_field :id
   field :login, String, null: false

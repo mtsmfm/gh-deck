@@ -1,4 +1,4 @@
-class Types::GithubEventType < Types::BaseObject
+class Types::GithubEvent < Types::BaseObject
 
   global_id_field :id
   field :type, String, null: false
@@ -11,7 +11,7 @@ class Types::GithubEventType < Types::BaseObject
   def html_url
     object.payload.dig('comment', 'html_url') || object.payload.dig('issue', 'html_url') || object.payload.dig('pull_request', 'html_url')
   end
-  field :github_user, Types::GithubUserType, null: false
+  field :github_user, Types::GithubUser, null: false
 
   def github_user
     object.github_user

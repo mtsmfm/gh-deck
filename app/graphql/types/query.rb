@@ -1,6 +1,6 @@
-class Types::QueryType < Types::BaseObject
+class Types::Query < Types::BaseObject
 
-  field :viewer, Types::UserType, description: "User", null: true
+  field :viewer, Types::User, description: "User", null: true
 
   def viewer
     context[:current_user]

@@ -1,8 +1,8 @@
 class AppSchema < GraphQL::Schema
 
-  mutation(Types::MutationType)
-  query(Types::QueryType)
-  subscription Types::SubscriptionType
+  mutation(Types::Mutation)
+  query(Types::Query)
+  subscription Types::Subscription
   # Relay Object Identification:
 
   class << self
