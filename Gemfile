@@ -10,7 +10,7 @@ gem 'bootsnap', require: false
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'webpacker'
-gem 'graphql'
+gem 'graphql', github: 'mtsmfm/graphql-ruby', branch: 'use-method-instead-of-ivar'
 gem 'graphql-batch'
 gem 'octokit'
 
@@ -22,3 +22,5 @@ end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
+
+gem 'parser'
