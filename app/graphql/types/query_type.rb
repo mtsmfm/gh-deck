@@ -6,5 +6,5 @@ class Types::QueryType < Types::BaseObject
     context[:current_user]
   end
 
-  field :node, GraphQL::Relay::Node.field, null: true
+  field :node, field: GraphQL::Relay::Node.field, null: true
 end
