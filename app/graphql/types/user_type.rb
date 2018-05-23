@@ -1,12 +1,11 @@
-Types::UserType = GraphQL::ObjectType.define do
-  name "User"
+class Types::UserType < Types::BaseObject
 
   global_id_field :id
-  field :name, !types.String
-  field :image, !types.String
-  field :githubEvents, !types[Types::GithubEventType] do
-    resolve -> (obj, args, ctx) {
-      obj.github_events.order(github_created_at: :desc).limit(10)
-    }
+  field :name, String, null: false
+  field :image, String, null: false
+  field :github_events, [Types::GithubEventType, null: true], null: false
+
+  def github_events
+    object.github_events.order(github_created_at: :desc).limit(10)
   end
 end

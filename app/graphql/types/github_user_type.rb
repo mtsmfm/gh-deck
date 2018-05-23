@@ -1,11 +1,10 @@
-Types::GithubUserType = GraphQL::ObjectType.define do
-  name "GithubUser"
+class Types::GithubUserType < Types::BaseObject
 
   global_id_field :id
-  field :login, !types.String
-  field :avatarUrl, !types.String do
-    resolve -> (obj, args, ctx) {
-      obj.avatar_url
-    }
+  field :login, String, null: false
+  field :avatar_url, String, null: false
+
+  def avatar_url
+    object.avatar_url
   end
 end

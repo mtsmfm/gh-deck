@@ -1,30 +1,29 @@
-Types::GithubEventType = GraphQL::ObjectType.define do
-  name "GithubEvent"
+class Types::GithubEventType < Types::BaseObject
 
   global_id_field :id
-  field :type, !types.String do
-    resolve ->(obj, args, ctx) {
-      obj.github_type
-    }
+  field :type, String, null: false
+
+  def type
+    object.github_type
   end
-  field :htmlUrl, types.String do
-    resolve -> (obj, args, ctx) {
-      obj.payload.dig('comment', 'html_url') || obj.payload.dig('issue', 'html_url') || obj.payload.dig('pull_request', 'html_url')
-    }
+  field :html_url, String, null: true
+
+  def html_url
+    object.payload.dig('comment', 'html_url') || object.payload.dig('issue', 'html_url') || object.payload.dig('pull_request', 'html_url')
   end
-  field :githubUser, !Types::GithubUserType do
-    resolve -> (obj, args, ctx) {
-      obj.github_user
-    }
+  field :github_user, Types::GithubUserType, null: false
+
+  def github_user
+    object.github_user
   end
-  field :body, types.String do
-    resolve -> (obj, args, ctx) {
-      obj.payload.dig('comment', 'body')
-    }
+  field :body, String, null: true
+
+  def body
+    object.payload.dig('comment', 'body')
   end
-  field :createdAt, !types.String do
-    resolve -> (obj, args, ctx) {
-      obj.github_created_at.iso8601
-    }
+  field :created_at, String, null: false
+
+  def created_at
+    object.github_created_at.iso8601
   end
 end
