@@ -13,9 +13,6 @@ type GithubUser {
   login: String!
 }
 
-type Mutation {
-}
-
 # An object with an ID.
 interface Node {
   # ID of the object.
