@@ -45,3 +45,11 @@ class App extends React.Component {
 }
 
 export default hot(module)(App);
+
+if (module.hot) {
+  module.hot.accept();
+
+  window.addEventListener('message', e => {
+    console.clear();
+  });
+}
