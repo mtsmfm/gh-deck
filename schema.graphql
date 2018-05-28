@@ -1,10 +1,53 @@
-type GithubEvent {
-  body: String
+interface GithubEvent {
   createdAt: String!
+  githubRepository: GithubRepository!
   githubUser: GithubUser!
-  htmlUrl: String
   id: ID!
   type: String!
+}
+
+type GithubEvent_PushEvent implements GithubEvent {
+  createdAt: String!
+  githubRepository: GithubRepository!
+  githubUser: GithubUser!
+  id: ID!
+  payload: GithubEvent_PushEvent_Payload!
+  type: String!
+}
+
+type GithubEvent_PushEvent_Author {
+  email: String!
+  name: String!
+}
+
+type GithubEvent_PushEvent_Commit {
+  author: GithubEvent_PushEvent_Author!
+  distinct: Boolean!
+  message: String!
+  sha: String!
+  url: String!
+}
+
+type GithubEvent_PushEvent_Payload {
+  before: String!
+  commits: [GithubEvent_PushEvent_Commit!]!
+  head: String!
+  ref: String!
+  size: Int!
+}
+
+type GithubEvent_UnknownEvent implements GithubEvent {
+  body: String
+  createdAt: String!
+  githubRepository: GithubRepository!
+  githubUser: GithubUser!
+  id: ID!
+  type: String!
+}
+
+type GithubRepository {
+  id: ID!
+  name: String!
 }
 
 type GithubUser {
