@@ -20,7 +20,7 @@ WORKDIR /app
 
 USER app
 
-COPY Gemfile Gemfile.lock ./
+COPY --chown=app Gemfile Gemfile.lock ./
 
 RUN bundle install
 
