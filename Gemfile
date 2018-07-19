@@ -10,7 +10,7 @@ gem 'bootsnap', require: false
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'webpacker'
-gem 'graphql', github: 'mtsmfm/graphql-ruby', branch: 'use-method-instead-of-ivar'
+gem 'graphql'
 gem 'graphql-batch'
 gem 'octokit'
 
