@@ -8,7 +8,7 @@ module Types::GithubEvent
   field :created_at, String, null: false
   field :github_repository, Types::GithubRepository, null: false
 
-  orphan_types Types::GithubEvent::PushEvent, Types::GithubEvent::UnknownEvent
+  orphan_types PushEvent, CreateEvent, UnknownEvent
 
   def created_at
     object.github_created_at.iso8601
@@ -19,6 +19,8 @@ module Types::GithubEvent
       case object.github_type
       when 'PushEvent'
         PushEvent
+      when 'CreateEvent'
+        CreateEvent
       else
         UnknownEvent
       end

@@ -3,11 +3,14 @@ import {Avatar, ListItemText, ListItem} from 'material-ui';
 import {createFragmentContainer, graphql} from 'react-relay';
 import PushEvent from './github-events/PushEvent'
 import UnknownEvent from './github-events/UnknownEvent'
+import CreateEvent from './github-events/CreateEvent'
 
 const componentFor = ({githubEvent, viewer}) => {
   switch(githubEvent.type) {
     case 'PushEvent':
       return <PushEvent githubEvent={githubEvent} viewer={viewer} />;
+    case 'CreateEvent':
+      return <CreateEvent githubEvent={githubEvent} viewer={viewer} />;
     default:
       return <UnknownEvent githubEvent={githubEvent} viewer={viewer} />;
   }
@@ -27,6 +30,7 @@ export default createFragmentContainer(GithubEventListItem, {
     fragment GithubEventListItem_viewer on User {
       now
       ...PushEvent_viewer
+      ...CreateEvent_viewer
       ...UnknownEvent_viewer
     }
   `,
@@ -37,6 +41,7 @@ export default createFragmentContainer(GithubEventListItem, {
         avatarUrl, login
       }
       ...PushEvent_githubEvent
+      ...CreateEvent_githubEvent
       ...UnknownEvent_githubEvent
     }
   `,
