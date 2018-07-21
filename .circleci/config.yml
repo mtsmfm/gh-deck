@@ -7,7 +7,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build . -t mtsmfm/gh-deck:$CIRCLE_SHA1
+      - run: docker build . -t mtsmfm/gh-deck:$CIRCLE_SHA1 --cache-from mtsmfm/gh-deck:latest
       - run: docker tag mtsmfm/gh-deck:$CIRCLE_SHA1 mtsmfm/gh-deck:latest
       - run: docker push mtsmfm/gh-deck:$CIRCLE_SHA1
       - run: docker push mtsmfm/gh-deck:latest
