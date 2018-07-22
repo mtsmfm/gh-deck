@@ -15,14 +15,18 @@ spec:
             image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
             imagePullPolicy: {{ .Values.image.pullPolicy }}
             command: ['bin/rails', 'r', 'User.find_each {|u| ImportGithubReceivedEventsJob.perform_now(u) }']
+            {{ if .Values.mountLocal }}
             volumeMounts:
             - name: approot
               mountPath: /app
+            {{ end }}
             env:
             - name: DATABASE_URL
-              value: postgresql://postgres:mysecretpassword@{{ template "fullname" . }}-postgres
+              value: {{ .Values.databaseUrl }}
           restartPolicy: Never
+          {{ if .Values.mountLocal }}
           volumes:
           - name: approot
             hostPath:
               path: {{ .Values.currentDir }}
+          {{ end }}

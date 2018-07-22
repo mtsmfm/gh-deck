@@ -26,16 +26,18 @@ spec:
         - containerPort: {{ .Values.service.internalPort }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
+        {{ if .Values.mountLocal }}
         volumeMounts:
         - name: approot
           mountPath: /app
+        {{ end }}
         env:
         - name: GITHUB_CLIENT_ID
           value: {{ .Values.githubClientId }}
         - name: GITHUB_CLIENT_SECRET
           value: {{ .Values.githubClientSecret }}
         - name: DATABASE_URL
-          value: postgresql://postgres:mysecretpassword@{{ template "fullname" . }}-postgres
+          value: {{ .Values.databaseUrl }}
       {{ if .Values.console.enabled }}
       - <<: *main
         name: {{ .Chart.Name }}-console
@@ -55,10 +57,12 @@ spec:
         command: ['yarn', 'run', 'relay', '--', '--watch']
         ports: []
       {{ end }}
+      {{ if .Values.mountLocal }}
       volumes:
       - name: approot
         hostPath:
           path: {{ .Values.currentDir }}
+      {{ end }}
 {{ if .Values.postgres.enabled }}
 ---
 apiVersion: extensions/v1beta1

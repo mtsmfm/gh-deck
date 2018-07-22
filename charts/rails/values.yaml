@@ -18,4 +18,5 @@ console:
   enabled: false
 ingress:
   enabled: true
+mountLocal: false
 basedomain: localhost

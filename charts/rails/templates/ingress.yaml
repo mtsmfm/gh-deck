@@ -14,6 +14,7 @@ spec:
         backend:
           serviceName: {{ template "fullname" . }}
           servicePort: {{ .Values.service.externalPort }}
+  {{ if .Values.webpackDevServer.enabled }}
   - host: {{ .Release.Name }}-webpack-dev-server.{{ .Values.basedomain }}
     http:
       paths:
@@ -21,4 +22,5 @@ spec:
         backend:
           serviceName: {{ template "fullname" . }}
           servicePort: {{ .Values.webpackDevServer.externalPort }}
+  {{ end }}
 {{- end -}}
