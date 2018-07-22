@@ -24,6 +24,6 @@ COPY --chown=app Gemfile Gemfile.lock ./
 
 RUN bundle install
 
-COPY . ./
+COPY --chown=app . ./
 
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]
