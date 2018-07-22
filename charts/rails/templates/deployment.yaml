@@ -36,23 +36,30 @@ spec:
           value: {{ .Values.githubClientSecret }}
         - name: DATABASE_URL
           value: postgresql://postgres:mysecretpassword@{{ template "fullname" . }}-postgres
+      {{ if .Values.console.enabled }}
       - <<: *main
         name: {{ .Chart.Name }}-console
         command: ['sh', '-c', 'while true; do sleep 1; done']
         ports: []
+      {{ end }}
+      {{ if .Values.webpackDevServer.enabled }}
       - <<: *main
         name: {{ .Chart.Name }}-webpack-dev-server
         command: ['bin/webpack-dev-server']
         ports:
         - containerPort: {{ .Values.webpackDevServer.internalPort }}
+      {{ end }}
+      {{ if .Values.relayCompiler.enabled }}
       - <<: *main
         name: {{ .Chart.Name }}-relay-compiler
         command: ['yarn', 'run', 'relay', '--', '--watch']
         ports: []
+      {{ end }}
       volumes:
       - name: approot
         hostPath:
           path: {{ .Values.currentDir }}
+{{ if .Values.postgres.enabled }}
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -81,3 +88,4 @@ spec:
       - name: pg-data
         persistentVolumeClaim:
           claimName: pv0001
+{{ end }}

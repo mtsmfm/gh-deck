@@ -9,5 +9,9 @@
     set=[
       "currentDir=/path/to/gh-deck"
       "githubClientId=xxxxxxxx",
-      "githubClientSecret=xxxxxxxxxxxxxxx"
+      "githubClientSecret=xxxxxxxxxxxxxxx",
+      "console.enabled=true",
+      "webpackDevServer.enabled=true",
+      "relayCompiler.enabled=true",
+      "postgres.enabled=true",
     ]

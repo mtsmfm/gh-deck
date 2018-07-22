@@ -11,12 +11,15 @@ spec:
     targetPort: {{ .Values.service.internalPort }}
     protocol: TCP
     name: {{ .Values.service.name }}
+  {{ if .Values.webpackDevServer.enabled }}
   - port: {{ .Values.webpackDevServer.externalPort }}
     targetPort: {{ .Values.webpackDevServer.internalPort }}
     protocol: TCP
     name: webpack-dev-server
+  {{ end }}
   selector:
     app: {{ template "fullname" . }}
+{{ if .Values.postgres.enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -31,3 +34,4 @@ spec:
     protocol: TCP
   selector:
     app: {{ template "fullname" . }}-postgres
+{{ end }}

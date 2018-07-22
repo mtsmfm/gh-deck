@@ -9,6 +9,13 @@ service:
 webpackDevServer:
   externalPort: 81
   internalPort: 3001
+  enabled: false
+postgres:
+  enabled: false
+relayCompiler:
+  enabled: false
+console:
+  enabled: false
 ingress:
   enabled: true
 basedomain: localhost
