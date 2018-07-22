@@ -16,9 +16,9 @@ jobs:
     docker:
       - image: google/cloud-sdk
     steps:
-      - run: echo $GCLOUD_SERVICE_KEY > ~/gcloud-service-key.json
+      - run: echo $GCLOUD_SERVICE_KEY > $HOME/gcloud-service-key.json
       - run: |
-          sudo gcloud auth activate-service-account --key-file=~/gcloud-service-key.json
+          sudo gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
           sudo gcloud --quiet container clusters get-credentials cluster-1 --zone asia-northeast1-a --project gh-deck
 workflows:
   version: 2
