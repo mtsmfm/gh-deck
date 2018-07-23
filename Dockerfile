@@ -1,6 +1,6 @@
 FROM ruby
 
-ENV BUNDLE_JOBS=4
+ENV BUNDLE_JOBS=4 RAILS_LOG_TO_STDOUT=true RAILS_SERVE_STATIC_FILES=true
 
 COPY --from=node /usr/local /usr/local
 COPY --from=node /opt /opt
@@ -25,5 +25,7 @@ COPY --chown=app Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY --chown=app . ./
+
+RUN RAILS_ENV=production bin/rails assets:precompile
 
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]
