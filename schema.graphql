@@ -6,6 +6,22 @@ interface GithubEvent {
   type: String!
 }
 
+type GithubEvent_CreateEvent implements GithubEvent {
+  createdAt: String!
+  githubRepository: GithubRepository!
+  githubUser: GithubUser!
+  id: ID!
+  payload: GithubEvent_CreateEvent_Payload!
+  type: String!
+}
+
+type GithubEvent_CreateEvent_Payload {
+  description: String
+  masterBranch: String!
+  ref: String
+  refType: String!
+}
+
 type GithubEvent_PushEvent implements GithubEvent {
   createdAt: String!
   githubRepository: GithubRepository!
@@ -56,19 +72,7 @@ type GithubUser {
   login: String!
 }
 
-# An object with an ID.
-interface Node {
-  # ID of the object.
-  id: ID!
-}
-
 type Query {
-  # Fetches an object given its ID.
-  node(
-    # ID of the object.
-    id: ID!
-  ): Node
-
   # User
   viewer: User
 }
