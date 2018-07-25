@@ -26,6 +26,6 @@ RUN bundle install
 
 COPY --chown=app . ./
 
-RUN RAILS_ENV=production bin/rails assets:precompile
+RUN SECRET_KEY_BASE=`bin/rails secret` RAILS_ENV=production bin/rails assets:precompile
 
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]
