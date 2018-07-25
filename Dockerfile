@@ -24,7 +24,13 @@ COPY --chown=app Gemfile Gemfile.lock ./
 
 RUN bundle install
 
+COPY --chown=app package.json yarn.lock ./
+
+RUN yarn install
+
 COPY --chown=app . ./
+
+RUN yarn run relay
 
 RUN SECRET_KEY_BASE=`bin/rails secret` RAILS_ENV=production bin/rails assets:precompile
 
