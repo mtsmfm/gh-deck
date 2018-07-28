@@ -3,7 +3,7 @@ image:
   pullPolicy: IfNotPresent
 service:
   name: ruby
-  type: ClusterIP
+  type: NodePort
   externalPort: 80
   internalPort: 3000
 webpackDevServer:
