@@ -30,8 +30,8 @@ RUN yarn install
 
 COPY --chown=app . ./
 
-RUN yarn run relay
-
-RUN SECRET_KEY_BASE=`bin/rails secret` RAILS_ENV=production bin/rails assets:precompile
+RUN if [ -z "$DISABLE_COMPILE" ]; then \
+  yarn run relay && SECRET_KEY_BASE=`bin/rails secret` RAILS_ENV=production bin/rails assets:precompile \
+  ;fi
 
 CMD ["bin/rails", "server", "-b", "0.0.0.0"]

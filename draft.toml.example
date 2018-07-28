@@ -14,4 +14,9 @@
       "webpackDevServer.enabled=true",
       "relayCompiler.enabled=true",
       "postgres.enabled=true",
+      "mountLocal=true",
+      "databaseUrl=postgresql://postgres:mysecretpassword@gh-deck-rails-postgres",
+      "railsEnv=false",
+      "webpackDevServer.host=gh-deck-webpack-dev-server.localhost",
+      "host=gh-deck.localhost"
     ]

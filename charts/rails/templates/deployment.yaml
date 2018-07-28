@@ -38,6 +38,14 @@ spec:
           value: {{ .Values.githubClientSecret }}
         - name: DATABASE_URL
           value: {{ .Values.databaseUrl }}
+        {{ if .Values.railsEnv }}
+        - name: RAILS_ENV
+          value: {{ .Values.railsEnv }}
+        {{ end }}
+        {{ if .Values.secretKeyBase }}
+        - name: SECRET_KEY_BASE
+          value: {{ .Values.secretKeyBase }}
+        {{ end }}
       {{ if .Values.console.enabled }}
       - <<: *main
         name: {{ .Chart.Name }}-console

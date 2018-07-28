@@ -5,22 +5,30 @@ metadata:
   name: {{ template "fullname" . }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+  {{ if .Values.ingress.globalStaticIpName }}
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: {{ .Values.ingress.globalStaticIpName }}
+  {{ end }}
 spec:
   rules:
-  - host: {{ .Release.Name }}.{{ .Values.basedomain }}
+  - host: {{ .Values.host }}
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: {{ template "fullname" . }}
           servicePort: {{ .Values.service.externalPort }}
   {{ if .Values.webpackDevServer.enabled }}
-  - host: {{ .Release.Name }}-webpack-dev-server.{{ .Values.basedomain }}
+  - host: {{ .Values.webpackDevServer.host }}
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           serviceName: {{ template "fullname" . }}
           servicePort: {{ .Values.webpackDevServer.externalPort }}
+  {{ end }}
+  {{ if .Values.certificate.enabled }}
+  tls:
+  - secretName: {{ template "fullname" . }}-tls
+    hosts:
+    - {{ .Values.host }}
   {{ end }}
 {{- end -}}

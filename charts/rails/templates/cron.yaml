@@ -23,6 +23,10 @@ spec:
             env:
             - name: DATABASE_URL
               value: {{ .Values.databaseUrl }}
+            {{ if .Values.railsEnv }}
+            - name: RAILS_ENV
+              value: {{ .Values.railsEnv }}
+            {{ end }}
           restartPolicy: Never
           {{ if .Values.mountLocal }}
           volumes:
