@@ -46,6 +46,11 @@ spec:
         - name: SECRET_KEY_BASE
           value: {{ .Values.secretKeyBase }}
         {{ end }}
+        livenessProbe:
+          tcpSocket:
+            port: {{ .Values.service.internalPort }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
       {{ if .Values.console.enabled }}
       - <<: *main
         name: {{ .Chart.Name }}-console

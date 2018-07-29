@@ -22,6 +22,12 @@ jobs:
           gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
           gcloud --quiet container clusters get-credentials cluster-1 --zone asia-northeast1-a --project gh-deck
       - run: curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+      - run: curl https://storage.googleapis.com/kubernetes-helm/helm-v2.9.1-linux-amd64.tar.gz > helm.tar.gz
+      - run: tar -zxvf helm.tar.gz
+      - run: mv linux-amd64/helm /usr/local/bin/helm
+      - run: rm helm.tar.gz
+      - run: helm init --upgrade
+      - run: helm upgrade gh-deck ./charts/rails --reuse-values --set "image.tag=$CIRCLE_SHA1"
 workflows:
   version: 2
   build_and_push_and_deploy:
@@ -30,3 +36,6 @@ workflows:
       - deploy:
           requires:
             - build_and_push
+          filters:
+            branches:
+              only: master
