@@ -36,8 +36,22 @@ spec:
           value: {{ .Values.githubClientId }}
         - name: GITHUB_CLIENT_SECRET
           value: {{ .Values.githubClientSecret }}
+        {{ if .Values.databaseUrl }}
         - name: DATABASE_URL
           value: {{ .Values.databaseUrl }}
+        {{ end }}
+        {{ if .Values.databaseHost }}
+        - name: DATABASE_HOST
+          value: {{ .Values.databaseHost }}
+        {{ end }}
+        {{ if .Values.databaseUser }}
+        - name: DATABASE_USER
+          value: {{ .Values.databaseUser }}
+        {{ end }}
+        {{ if .Values.databasePassword }}
+        - name: DATABASE_PASSWORD
+          value: {{ .Values.databasePassword }}
+        {{ end }}
         {{ if .Values.railsEnv }}
         - name: RAILS_ENV
           value: {{ .Values.railsEnv }}

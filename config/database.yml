@@ -2,21 +2,18 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  <% url = URI.parse(ENV.fetch("DATABASE_URL", "")) %>
+  host: <%= url.host || ENV.fetch("DATABASE_HOST") %>
+  user: <%= url.user || ENV.fetch("DATABASE_USER") %>
+  password: <%= url.password || ENV.fetch("DATABASE_PASSWORD") %>
 
 development:
   <<: *default
   database: app_development
-  <% url = URI.parse(ENV.fetch("DATABASE_URL")) %>
-  host: <%= url.host %>
-  user: <%= url.user %>
-  password: <%= url.password %>
 
 test:
   <<: *default
   database: app_test
-  host: <%= url.host %>
-  user: <%= url.user %>
-  password: <%= url.password %>
 
 production:
   <<: *default
