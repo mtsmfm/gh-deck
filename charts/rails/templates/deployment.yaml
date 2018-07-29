@@ -46,8 +46,9 @@ spec:
         - name: SECRET_KEY_BASE
           value: {{ .Values.secretKeyBase }}
         {{ end }}
-        livenessProbe:
-          tcpSocket:
+        readinessProbe:
+          httpGet:
+            path: /healthz
             port: {{ .Values.service.internalPort }}
           initialDelaySeconds: 5
           periodSeconds: 10
