@@ -47,6 +47,10 @@ spec:
             - name: RAILS_ENV
               value: {{ .Values.railsEnv }}
             {{ end }}
+            {{ if .Values.secretKeyBase }}
+            - name: SECRET_KEY_BASE
+              value: {{ .Values.secretKeyBase }}
+            {{ end }}
           restartPolicy: Never
           {{ if .Values.mountLocal }}
           volumes:
