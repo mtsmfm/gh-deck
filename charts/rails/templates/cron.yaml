@@ -21,8 +21,28 @@ spec:
               mountPath: /app
             {{ end }}
             env:
+            {{ if .Values.databaseUrl }}
             - name: DATABASE_URL
               value: {{ .Values.databaseUrl }}
+            {{ end }}
+            {{ if .Values.databaseHost }}
+            - name: DATABASE_HOST
+              value: {{ .Values.databaseHost }}
+            {{ end }}
+            {{ if .Values.databaseUser }}
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databaseUser.secretKeyRef.name }}
+                  key: {{ .Values.databaseUser.secretKeyRef.key }}
+            {{ end }}
+            {{ if .Values.databasePassword }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databasePassword.secretKeyRef.name }}
+                  key: {{ .Values.databasePassword.secretKeyRef.key }}
+            {{ end }}
             {{ if .Values.railsEnv }}
             - name: RAILS_ENV
               value: {{ .Values.railsEnv }}

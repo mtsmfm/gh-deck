@@ -35,3 +35,19 @@ spec:
   selector:
     app: {{ template "fullname" . }}-postgres
 {{ end }}
+{{ if .Values.databaseInstance }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "fullname" . }}-cloudsql-proxy
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    protocol: TCP
+  selector:
+    app: {{ template "fullname" . }}-cloudsql-proxy
+{{ end }}

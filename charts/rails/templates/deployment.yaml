@@ -46,11 +46,17 @@ spec:
         {{ end }}
         {{ if .Values.databaseUser }}
         - name: DATABASE_USER
-          value: {{ .Values.databaseUser }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.databaseUser.secretKeyRef.name }}
+              key: {{ .Values.databaseUser.secretKeyRef.key }}
         {{ end }}
         {{ if .Values.databasePassword }}
         - name: DATABASE_PASSWORD
-          value: {{ .Values.databasePassword }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.databasePassword.secretKeyRef.name }}
+              key: {{ .Values.databasePassword.secretKeyRef.key }}
         {{ end }}
         {{ if .Values.railsEnv }}
         - name: RAILS_ENV
@@ -120,4 +126,36 @@ spec:
       - name: pg-data
         persistentVolumeClaim:
           claimName: pv0001
+{{ end }}
+{{ if .Values.databaseInstance }}
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}-cloudsql-proxy
+  labels:
+    draft: {{ default "draft-app" .Values.draft }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        buildID: {{ .Values.buildID }}
+      labels:
+        draft: {{ default "draft-app" .Values.draft }}
+        app: {{ template "fullname" . }}-cloudsql-proxy
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}-cloudsql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.11
+        command: ["/cloud_sql_proxy", "-instances={{ .Values.databaseInstance.name }}=tcp:0.0.0.0:{{ .Values.databaseInstance.port }}", "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-instance-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
 {{ end }}
