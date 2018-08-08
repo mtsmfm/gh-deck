@@ -1,5 +1,7 @@
 FROM ruby
 
+ARG DISABLE_COMPILE
+
 ENV BUNDLE_JOBS=4 RAILS_LOG_TO_STDOUT=true RAILS_SERVE_STATIC_FILES=true
 
 COPY --from=node /usr/local /usr/local
