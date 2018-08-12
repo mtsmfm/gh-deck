@@ -1,0 +1,7 @@
+commonLabels:
+  app: gh-deck
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - cron.yaml
+  - service.yaml

@@ -1,0 +1,9 @@
+bases:
+  - ../../base
+resources:
+  - cloudsql-proxy.yaml
+  - ingress.yaml
+  - certificate.yaml
+patches:
+  - deployment.yaml
+  - cron.yaml

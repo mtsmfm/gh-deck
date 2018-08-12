@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gh-deck
+spec:
+  template:
+    spec:
+      containers:
+      - &main
+        name: rails
+        image: ${GH_DECK_IMAGE}
+        stdin: true
+        tty: true
+        env:
+        - name: DATABASE_HOST
+          value: gh-deck-postgres
+        - name: DATABASE_USER
+          value: postgres
+        - name: DATABASE_PASSWORD
+          value: mysecretpassword
+      - <<: *main
+        name: console
+        command: ['sh', '-c', 'while true; do sleep 1; done']
+        ports: []
+      - <<: *main
+        name: webpack-dev-server
+        command: ['bin/webpack-dev-server']
+        ports:
+        - containerPort: 3001
+      - <<: *main
+        name: relay-compiler
+        command: ['yarn', 'run', 'relay', '--', '--watch']
+        ports: []

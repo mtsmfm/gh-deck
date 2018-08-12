@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+set -ex
+
+kustomize build k8s/overlays/development | \
+  sed -e "s?\${PWD}?$PWD?g" \
+      -e "s?\${GH_DECK_IMAGE}?$(docker image ls mtsmfm/gh-deck --format "{{.Repository}}:{{.Tag}}" | grep -E "mtsmfm/gh-deck:\d+" | sort -r | head -n 1)?g" | \
+  kubectl apply -f -

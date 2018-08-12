@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gh-deck
+spec:
+  template:
+    spec:
+      containers:
+      - &main
+        name: rails
+        volumeMounts:
+        - name: approot
+          mountPath: /app
+      - <<: *main
+        name: console
+      - <<: *main
+        name: webpack-dev-server
+      - <<: *main
+        name: relay-compiler
+      volumes:
+      - name: approot
+        hostPath:
+          path: ${PWD}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: gh-deck
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: import-gh-events
+            volumeMounts:
+            - name: approot
+              mountPath: /app
+          volumes:
+          - name: approot
+            hostPath:
+              path: ${PWD}

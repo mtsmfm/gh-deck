@@ -1,0 +1,34 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: gh-deck
+spec:
+  schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 5
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: import-gh-events
+            image: mtsmfm/gh-deck
+            imagePullPolicy: IfNotPresent
+            command: ['bin/rails', 'r', 'User.find_each {|u| ImportGithubReceivedEventsJob.perform_now(u) }']
+            env:
+            - name: GITHUB_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: githubClientId
+            - name: GITHUB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: githubClientSecret
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: secretKeyBase
+          restartPolicy: Never

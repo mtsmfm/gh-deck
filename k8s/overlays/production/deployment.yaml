@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gh-deck
+spec:
+  template:
+    spec:
+      containers:
+      - name: rails
+        image: ${GH_DECK_IMAGE}
+        env:
+        - name: RAILS_ENV
+          value: production
+        - name: DATABASE_HOST
+          value: cloudsql-proxy
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: username
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cloudsql-db-credentials
+              key: password

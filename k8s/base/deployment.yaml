@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gh-deck
+spec:
+  template:
+    spec:
+      containers:
+      - name: rails
+        image: mtsmfm/gh-deck
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+        env:
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: githubClientId
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: githubClientSecret
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: secretKeyBase
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10

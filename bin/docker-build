@@ -1,0 +1,4 @@
+#! /usr/bin/env sh
+
+docker build . -t mtsmfm/gh-deck:latest --build-arg DISABLE_COMPILE=true
+docker tag mtsmfm/gh-deck:latest mtsmfm/gh-deck:$(date +%s)

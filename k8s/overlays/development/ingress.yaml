@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gh-deck-rails
+spec:
+  rules:
+  - host: gh-deck.localhost
+    http:
+      paths:
+      - backend:
+          serviceName: gh-deck
+          servicePort: 80
+  - host: gh-deck-webpack-dev-server.localhost
+    http:
+      paths:
+      - backend:
+          serviceName: gh-deck
+          servicePort: 81

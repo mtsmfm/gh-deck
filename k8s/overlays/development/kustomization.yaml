@@ -1,0 +1,18 @@
+bases:
+  - ../../base
+resources:
+  - ingress.yaml
+  - pg.yaml
+  - pvc.yaml
+patches:
+  - deployment.yaml
+  - service.yaml
+  - local-volume.yaml
+  - ingress.yaml
+  - cron.yaml
+secretGenerator:
+- name: app-secret
+  commands:
+    githubClientId: cat ../../.secrets/githubClientId | tr -d "\n"
+    githubClientSecret: cat ../../.secrets/githubClientSecret | tr -d "\n"
+    secretKeyBase: echo secret
