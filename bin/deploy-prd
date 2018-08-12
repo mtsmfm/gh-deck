@@ -2,7 +2,6 @@
 
 set -ex
 
-kustomize build k8s/overlays/development | \
-  sed -e "s?\${PWD}?$PWD?g" \
-      -e "s?\${GH_DECK_IMAGE}?mtsmfm/gh-deck:$(git rev-parse -q HEAD)?g" | \
+kustomize build k8s/overlays/production | \
+  sed -e "s?\${GH_DECK_IMAGE}?mtsmfm/gh-deck:$(git rev-parse -q HEAD)?g" | \
   kubectl apply -f -

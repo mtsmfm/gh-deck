@@ -21,7 +21,7 @@ jobs:
       - run: |
           gcloud auth activate-service-account --key-file=$HOME/gcloud-service-key.json
           gcloud --quiet container clusters get-credentials cluster-1 --zone asia-northeast1-a --project gh-deck
-      - run: curl https://github.com/kubernetes-sigs/kustomize/releases/download/v1.0.5/kustomize_1.0.5_linux_amd64 > /usr/local/bin/kustomize
+      - run: curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/v1.0.5/kustomize_1.0.5_linux_amd64 > /usr/local/bin/kustomize
       - run: chmod +x /usr/local/bin/kustomize
       - run: bin/deploy-prd
 workflows:
