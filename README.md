@@ -4,21 +4,34 @@ GH deck is an application to watch GitHub notification easily.
 
 ## How to develop
 
-1. Install draft: https://github.com/Azure/draft/blob/master/docs/getting-started.md
+1.  Create k8s cluster
 
-2. Create your own OAuth application: https://github.com/settings/applications/new
+2.  Install Helm: https://docs.helm.sh/using_helm/#installing-helm
 
-    Homepage URL: http://gh-deck.localhost
-    Authorization callback URL: http://gh-deck.localhost/auth/github
+3.  Install nginx-ingress
 
-3. Clone this repository
+        helm install stable/nginx-ingress
 
-      $ git clone https://github.com/mtsmfm/gh-deck /path/to/gh-deck
+4.  Create your own OAuth application: https://github.com/settings/applications/new
 
-4. Create draft.toml
+        Homepage URL: http://gh-deck.localhost
+        Authorization callback URL: http://gh-deck.localhost/auth/github
 
-      $ cp draft.toml.example draft.toml
+5.  Clone this repository
 
-5. Fill your draft.toml
+        $ git clone https://github.com/mtsmfm/gh-deck /path/to/gh-deck
 
-      $ open draft.toml
+6.  Save your own OAuth credentials
+
+        $ echo <your github client id> > .secrets/githubClientId
+        $ echo <your github client secret> > .secrets/githubClientSecret
+
+7.  Install Kustomize: https://github.com/kubernetes-sigs/kustomize
+
+8.  Build Docker image
+
+        bin/docker-build
+
+9.  Deploy
+
+        bin/deploy-dev
