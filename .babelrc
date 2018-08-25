@@ -22,7 +22,6 @@
         "spec": true
       }
     ],
-    "relay",
     "react-hot-loader/babel"
   ]
 }
