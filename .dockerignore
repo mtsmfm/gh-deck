@@ -3,7 +3,4 @@
 /.git
 /log
 /.circleci
-draft.toml
-draft.toml.example
-/charts
 /public/packs
