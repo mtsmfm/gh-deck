@@ -16,7 +16,7 @@ spec:
       - <<: *main
         name: webpack-dev-server
       - <<: *main
-        name: relay-compiler
+        name: apollo-codegen
       volumes:
       - name: approot
         hostPath:

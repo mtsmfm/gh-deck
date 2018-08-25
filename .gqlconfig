@@ -1,0 +1,22 @@
+{
+  schema: {
+    files: ['schema.graphql', 'clientSchema.graphql']
+  },
+  query: {
+    files: [
+      {
+        match: 'app/javascript/**/*.tsx',
+        parser: ['EmbeddedQueryParser', { startTag: 'gql`', endTag: '`' }],
+        validate: {
+          extends: 'gql-rules-query',
+          rules: {
+            NoUnusedFragments: 'off',
+            KnownFragmentNames: 'off',
+            FieldsOnCorrectType: 'off',
+            KnownDirectives: 'off'
+          }
+        }
+      }
+    ]
+  }
+}

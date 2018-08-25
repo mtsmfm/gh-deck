@@ -82,8 +82,12 @@ type Subscription {
 }
 
 type User {
-  githubEvents: [GithubEvent]!
+  githubEvents: [GithubEvent!]!
   id: ID!
   image: String!
   name: String!
+}
+
+type Mutation {
+  X: String
 }

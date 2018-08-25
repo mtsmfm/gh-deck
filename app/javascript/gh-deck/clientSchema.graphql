@@ -1,3 +1,7 @@
-extend type User {
+extend type Query {
   now: String!
+}
+
+extend type Mutation {
+  tick: String!
 }

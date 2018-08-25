@@ -3,18 +3,17 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es6", "dom"],
+    "jsx": "react",
+    "lib": ["es6", "es2017", "dom"],
     "module": "es6",
     "moduleResolution": "node",
+    "noImplicitReturns": true,
     "sourceMap": true,
-    "target": "es5",
-    "jsx": "react"
+    // `strict` enables noImplicitAny, noImplicitThis, alwaysStrict,
+    // strictNullChecks and strictFunctionTypes at once
+    "strict": true,
+    "target": "es5"
   },
-  "exclude": [
-    "**/*.spec.ts",
-    "node_modules",
-    "vendor",
-    "public"
-  ],
+  "exclude": ["**/*.spec.ts", "node_modules", "vendor", "public"],
   "compileOnSave": false
 }

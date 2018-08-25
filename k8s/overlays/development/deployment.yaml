@@ -28,6 +28,5 @@ spec:
         ports:
         - containerPort: 3001
       - <<: *main
-        name: relay-compiler
-        command: ['yarn', 'run', 'relay', '--', '--watch']
-        ports: []
+        name: apollo-codegen
+        command: ['yarn', 'run', 'apollo:codegen', '--watch']

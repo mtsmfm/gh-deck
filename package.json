@@ -1,10 +1,14 @@
 {
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "@types/actioncable": "^0.0.2",
     "@types/react": "^16.4.10",
     "@types/react-dom": "^16.0.7",
-    "actioncable": "^5.2.0",
-    "babel-plugin-relay": "^1.6.0",
+    "@types/webpack-env": "^1.13.6",
+    "actioncable": "^5.2.1",
+    "apollo-boost": "^0.1.13",
+    "apollo-cache-inmemory": "^1.2.8",
+    "apollo-link": "^1.2.2",
     "babel-preset-react": "^6.24.1",
     "graphiql": "^0.11.11",
     "graphql": "^0.13.2",
@@ -13,18 +17,45 @@
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
+    "react-apollo": "^2.1.11",
     "react-debounce-render": "^4.0.1",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^4.1.3",
     "react-markdown": "^3.3.2",
     "react-page-visibility": "^2.0.0",
-    "react-relay": "^1.6.0",
-    "relay-compiler": "^1.6.0",
     "ts-loader": "3.5.0",
     "typescript": "^3.0.1",
     "webpack-dev-server": "2.11.2"
   },
+  "devDependencies": {
+    "@playlyfe/gql": "^2.6.0",
+    "apollo": "^1.7.0"
+  },
   "scripts": {
-    "relay": "relay-compiler --src ./app/javascript --schema ./schema.graphql --client-schema ./app/javascript/gh-deck/clientSchema.graphql --extensions js jsx"
+    "apollo:codegen": "apollo codegen:generate --target typescript --queries app/javascript/**/*.tsx"
+  },
+  "apollo": {
+    "schemas": {
+      "gh-deck": {
+        "schema": "schema.graphql",
+        "endpoint": "http://gh-deck.localhost/graphql"
+      },
+      "gh-deck-client": {
+        "schema": "app/javascript/gh-deck/clientSchema.graphql",
+        "extends": "gh-deck",
+        "clientSide": true
+      }
+    },
+    "queries": [
+      {
+        "schema": "gh-deck-client",
+        "includes": [
+          "app/javascript/**/*.tsx"
+        ],
+        "excludes": [
+          "node_modules/**"
+        ]
+      }
+    ]
   }
 }
