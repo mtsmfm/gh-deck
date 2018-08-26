@@ -67,7 +67,24 @@
               "name": "githubEvents",
               "description": null,
               "args": [
-
+                {
+                  "name": "types",
+                  "description": null,
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "GithubEvent_TypeEnum",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                }
               ],
               "type": {
                 "kind": "NON_NULL",
@@ -126,7 +143,7 @@
               "deprecationReason": null
             },
             {
-              "name": "name",
+              "name": "login",
               "description": null,
               "args": [
 
@@ -248,8 +265,8 @@
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "ENUM",
+                  "name": "GithubEvent_TypeEnum",
                   "ofType": null
                 }
               },
@@ -277,6 +294,35 @@
               "ofType": null
             }
           ]
+        },
+        {
+          "kind": "ENUM",
+          "name": "GithubEvent_TypeEnum",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "CreateEvent",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PushEvent",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "UnknownEvent",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
         },
         {
           "kind": "OBJECT",
@@ -499,8 +545,8 @@
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "ENUM",
+                  "name": "GithubEvent_TypeEnum",
                   "ofType": null
                 }
               },
@@ -897,8 +943,8 @@
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "ENUM",
+                  "name": "GithubEvent_TypeEnum",
                   "ofType": null
                 }
               },
@@ -1095,8 +1141,8 @@
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
+                  "kind": "ENUM",
+                  "name": "GithubEvent_TypeEnum",
                   "ofType": null
                 }
               },

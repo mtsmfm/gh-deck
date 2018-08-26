@@ -3,7 +3,7 @@ interface GithubEvent {
   githubRepository: GithubRepository!
   githubUser: GithubUser!
   id: ID!
-  type: String!
+  type: GithubEvent_TypeEnum!
 }
 
 type GithubEvent_CreateEvent implements GithubEvent {
@@ -12,7 +12,7 @@ type GithubEvent_CreateEvent implements GithubEvent {
   githubUser: GithubUser!
   id: ID!
   payload: GithubEvent_CreateEvent_Payload!
-  type: String!
+  type: GithubEvent_TypeEnum!
 }
 
 type GithubEvent_CreateEvent_Payload {
@@ -28,7 +28,7 @@ type GithubEvent_PushEvent implements GithubEvent {
   githubUser: GithubUser!
   id: ID!
   payload: GithubEvent_PushEvent_Payload!
-  type: String!
+  type: GithubEvent_TypeEnum!
 }
 
 type GithubEvent_PushEvent_Author {
@@ -52,13 +52,19 @@ type GithubEvent_PushEvent_Payload {
   size: Int!
 }
 
+enum GithubEvent_TypeEnum {
+  CreateEvent
+  PushEvent
+  UnknownEvent
+}
+
 type GithubEvent_UnknownEvent implements GithubEvent {
   body: String
   createdAt: String!
   githubRepository: GithubRepository!
   githubUser: GithubUser!
   id: ID!
-  type: String!
+  type: GithubEvent_TypeEnum!
 }
 
 type GithubRepository {
@@ -86,8 +92,8 @@ type Subscription {
 }
 
 type User {
-  githubEvents: [GithubEvent!]!
+  githubEvents(types: [GithubEvent_TypeEnum!]): [GithubEvent!]!
   id: ID!
   image: String!
-  name: String!
+  login: String!
 }
