@@ -13,6 +13,6 @@ patches:
 secretGenerator:
 - name: app-secret
   commands:
-    githubClientId: cat ../../.secrets/githubClientId | tr -d "\n"
-    githubClientSecret: cat ../../.secrets/githubClientSecret | tr -d "\n"
+    githubClientId: cat ../../../.secrets/githubClientId | tr -d "\n"
+    githubClientSecret: cat ../../../.secrets/githubClientSecret | tr -d "\n"
     secretKeyBase: echo secret
