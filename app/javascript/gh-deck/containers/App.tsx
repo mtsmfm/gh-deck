@@ -38,54 +38,53 @@ class App extends React.Component {
                 <PageVisibility>
                   {isVisible =>
                     data.viewer ? (
-                      <Grid
-                        container
-                        style={{ visibility: isVisible ? "visible" : "hidden" }}
-                      >
+                      <Grid container>
                         <Grid item xs={2}>
                           <Avatar src={data.viewer.image} />
                         </Grid>
                         <Grid item xs={10}>
-                          <GithubEventList
-                            query={data}
-                            githubEvents={data.viewer.githubEvents}
-                            subscribeToMore={() => {
-                              subscribeToMore({
-                                document: gql`
-                                  subscription GithubEventCreatedSubscription {
-                                    githubEventCreated {
-                                      id
-                                      ...GithubEventList_githubEvent
+                          {isVisible && (
+                            <GithubEventList
+                              query={data}
+                              githubEvents={data.viewer.githubEvents}
+                              subscribeToMore={() => {
+                                subscribeToMore({
+                                  document: gql`
+                                    subscription GithubEventCreatedSubscription {
+                                      githubEventCreated {
+                                        id
+                                        ...GithubEventList_githubEvent
+                                      }
                                     }
+                                    ${GithubEventList.fragments.githubEvent}
+                                  `,
+                                  updateQuery: (
+                                    prev: AppQuery,
+                                    {
+                                      subscriptionData
+                                    }: { subscriptionData: { data: any } }
+                                  ) => {
+                                    const data: GithubEventCreatedSubscription =
+                                      subscriptionData.data;
+
+                                    if (!data) return prev;
+                                    if (!prev.viewer) return prev;
+
+                                    return {
+                                      ...prev,
+                                      viewer: {
+                                        ...prev.viewer,
+                                        githubEvents: [
+                                          data.githubEventCreated,
+                                          ...prev.viewer.githubEvents
+                                        ]
+                                      }
+                                    };
                                   }
-                                  ${GithubEventList.fragments.githubEvent}
-                                `,
-                                updateQuery: (
-                                  prev: AppQuery,
-                                  {
-                                    subscriptionData
-                                  }: { subscriptionData: { data: any } }
-                                ) => {
-                                  const data: GithubEventCreatedSubscription =
-                                    subscriptionData.data;
-
-                                  if (!data) return prev;
-                                  if (!prev.viewer) return prev;
-
-                                  return {
-                                    ...prev,
-                                    viewer: {
-                                      ...prev.viewer,
-                                      githubEvents: [
-                                        data.githubEventCreated,
-                                        ...prev.viewer.githubEvents
-                                      ]
-                                    }
-                                  };
-                                }
-                              });
-                            }}
-                          />
+                                });
+                              }}
+                            />
+                          )}
                         </Grid>
                       </Grid>
                     ) : (
