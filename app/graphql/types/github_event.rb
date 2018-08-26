@@ -3,12 +3,16 @@ module Types::GithubEvent
 
   global_id_field :id
 
-  field :type, String, method: :github_type, null: false
+  field :type, Types::GithubEvent::TypeEnum, null: false
   field :github_user, Types::GithubUser, null: false
   field :created_at, String, null: false
   field :github_repository, Types::GithubRepository, null: false
 
   orphan_types PushEvent, CreateEvent, UnknownEvent
+
+  def type
+    self.class.name.demodulize
+  end
 
   def github_user
     ::Loaders::RecordLoader.for(::GithubUser).load(object.github_user_id)
