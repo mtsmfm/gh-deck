@@ -106,7 +106,7 @@ GEM
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
-    pg (1.1.0)
+    pg (1.0.0)
     promise.rb (0.7.4)
     pry (0.11.3)
       coderay (~> 1.1.0)
@@ -185,7 +185,7 @@ DEPENDENCIES
   octokit
   omniauth
   omniauth-github
-  pg
+  pg (= 1.0.0)
   pry-byebug
   pry-rails
   puma
@@ -196,4 +196,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.3
+   1.16.4

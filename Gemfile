@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 
 gem 'rails', '~> 5.2.0'
-gem 'pg'
+gem 'pg', '1.0.0'
 gem 'puma'
 gem 'bootsnap', require: false
 gem 'omniauth'
