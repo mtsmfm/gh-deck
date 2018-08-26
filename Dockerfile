@@ -1,15 +1,15 @@
-FROM ruby
+FROM ruby:2.5.1-alpine
 
 ARG DISABLE_COMPILE
 
 ENV BUNDLE_JOBS=4 RAILS_LOG_TO_STDOUT=true RAILS_SERVE_STATIC_FILES=true
 
-COPY --from=node /usr/local /usr/local
-COPY --from=node /opt /opt
+COPY --from=node:10.9.0-alpine /usr/local /usr/local
+COPY --from=node:10.9.0-alpine /opt /opt
 
-RUN apt-get update && apt-get install -y less
+RUN apk update && apk add --no-cache build-base postgresql-dev tzdata
 
-RUN useradd --create-home --user-group --uid 1000 app
+RUN adduser -u 1000 -D app
 RUN mkdir /app
 RUN chown -R app /app
 
@@ -23,7 +23,9 @@ RUN bundle install
 
 COPY --chown=app package.json yarn.lock ./
 
-RUN yarn install
+RUN if [ -z "$DISABLE_COMPILE" ]; then \
+  yarn install \
+  ;fi
 
 COPY --chown=app . ./
 
