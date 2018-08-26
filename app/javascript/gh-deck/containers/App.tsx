@@ -1,6 +1,6 @@
+import { hot } from "react-hot-loader";
 import * as React from "react";
 import { Avatar, Button, Grid } from "material-ui";
-import { hot } from "react-hot-loader";
 import GithubEventList from "./GithubEventList";
 import { ApolloProvider, Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -102,7 +102,3 @@ class App extends React.Component {
 }
 
 export default hot(module)(App);
-
-if (module.hot) {
-  module.hot.accept();
-}
