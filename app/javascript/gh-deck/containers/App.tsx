@@ -18,7 +18,6 @@ class App extends React.Component {
             query AppQuery {
               viewer {
                 id
-                name
                 image
                 githubEvents {
                   ...GithubEventList_githubEvent
