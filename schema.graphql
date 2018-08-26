@@ -72,6 +72,10 @@ type GithubUser {
   login: String!
 }
 
+type Mutation {
+  dummy: String!
+}
+
 type Query {
   # User
   viewer: User
@@ -86,8 +90,4 @@ type User {
   id: ID!
   image: String!
   name: String!
-}
-
-type Mutation {
-  X: String
 }
