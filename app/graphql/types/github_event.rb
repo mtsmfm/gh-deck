@@ -10,6 +10,14 @@ module Types::GithubEvent
 
   orphan_types PushEvent, CreateEvent, UnknownEvent
 
+  def github_user
+    ::Loaders::RecordLoader.for(::GithubUser).load(object.github_user_id)
+  end
+
+  def github_repository
+    ::Loaders::RecordLoader.for(::GithubRepository).load(object.github_repository_id)
+  end
+
   def created_at
     object.github_created_at.iso8601
   end
