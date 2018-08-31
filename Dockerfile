@@ -7,7 +7,7 @@ ENV BUNDLE_JOBS=4 RAILS_LOG_TO_STDOUT=true RAILS_SERVE_STATIC_FILES=true
 COPY --from=node:10.9.0-alpine /usr/local /usr/local
 COPY --from=node:10.9.0-alpine /opt /opt
 
-RUN apk update && apk add --no-cache build-base postgresql-dev tzdata
+RUN apk update && apk add --no-cache build-base postgresql-dev tzdata less
 
 RUN adduser -u 1000 -D app
 RUN mkdir /app
