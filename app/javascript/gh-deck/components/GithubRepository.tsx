@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography } from "material-ui";
+import { Typography } from "@material-ui/core";
 
 const GithubRepository: React.SFC<{ name: string }> = ({ name }) => (
   <Typography

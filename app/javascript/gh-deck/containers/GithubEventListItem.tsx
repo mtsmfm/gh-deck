@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Avatar, ListItemText, ListItem } from "material-ui";
+import { Avatar, ListItemText, ListItem } from "@material-ui/core";
 import gql from "graphql-tag";
 import {
   GithubEventListItem_githubEvent,

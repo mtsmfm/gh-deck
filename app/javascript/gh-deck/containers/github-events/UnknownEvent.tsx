@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid, Typography } from "material-ui";
+import { Grid, Typography } from "@material-ui/core";
 import GithubRepository from "../../components/GithubRepository";
 import CreatedAt from "../../components/CreatedAt";
 import * as ReactMarkdown from "react-markdown";

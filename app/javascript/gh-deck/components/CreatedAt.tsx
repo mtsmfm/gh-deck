@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as moment from "moment";
-import { Typography, Tooltip } from "material-ui";
+import { Typography, Tooltip } from "@material-ui/core";
 
 const CreatedAt: React.SFC<{ createdAt: string; now: string }> = ({
   createdAt,

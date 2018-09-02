@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Grid, Typography, ListItem } from "material-ui";
+import { List, Grid, Typography, ListItem } from "@material-ui/core";
 import GithubRepository from "../../components/GithubRepository";
 import CreatedAt from "../../components/CreatedAt";
 import gql from "graphql-tag";

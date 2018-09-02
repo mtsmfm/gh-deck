@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Divider, Fade } from "material-ui";
+import { List, Divider, Fade } from "@material-ui/core";
 import GithubEventListItem from "./GithubEventListItem";
 import debounceRender from "react-debounce-render";
 import gql from "graphql-tag";
